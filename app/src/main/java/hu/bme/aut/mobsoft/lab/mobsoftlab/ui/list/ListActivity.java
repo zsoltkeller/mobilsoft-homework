@@ -1,8 +1,7 @@
-package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.login;
+package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.list;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -13,10 +12,10 @@ import hu.bme.aut.mobsoft.lab.mobsoftlab.R;
  * Created by mobsoft on 2017. 03. 31..
  */
 
-public class LoginActivity  extends AppCompatActivity implements LoginScreen{
+public class ListActivity extends AppCompatActivity implements ListScreen{
 
     @Inject
-    LoginPresenter loginPresenter;
+    ListPresenter listPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,23 +27,12 @@ public class LoginActivity  extends AppCompatActivity implements LoginScreen{
     @Override
     protected void onStart() {
         super.onStart();
-        loginPresenter.attachScreen(this);
+        listPresenter.attachScreen(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        loginPresenter.detachScreen();
+        listPresenter.detachScreen();
     }
-
-    @Override
-    public void showSuccessfulLogin(String text){
-
-    }
-
-    @Override
-    public void showErrorLogin(String text){
-
-    }
-
 }
