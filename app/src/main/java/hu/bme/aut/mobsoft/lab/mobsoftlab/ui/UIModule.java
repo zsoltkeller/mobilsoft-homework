@@ -6,7 +6,12 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.add.AddPresenter;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.details.DetailsPresenter;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.list.ListPresenter;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.login.LoginPresenter;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.main.MainPresenter;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.statistics.StatisticsPresenter;
 
 /**
  * Created by mobsoft on 2017. 03. 31..
@@ -31,4 +36,33 @@ public class UIModule {
         return new MainPresenter();
     }
 
+    @Provides
+    @Singleton
+    public LoginPresenter provideLoginPresenter() {
+        return new LoginPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public ListPresenter provideListPresenter() {
+        return new ListPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public DetailsPresenter provideDetailsPresenter() {
+        return new DetailsPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public AddPresenter provideAddPresenter() {
+        return new AddPresenter();
+    }
+
+    @Provides
+    @Singleton
+    public StatisticsPresenter provideStatisticsPresenter() {
+        return new StatisticsPresenter();
+    }
 }

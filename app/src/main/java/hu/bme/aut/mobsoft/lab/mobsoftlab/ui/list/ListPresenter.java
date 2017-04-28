@@ -1,4 +1,4 @@
-package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.main;
+package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.list;
 
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.Presenter;
 
@@ -6,13 +6,13 @@ import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.Presenter;
  * Created by mobsoft on 2017. 03. 31..
  */
 
-public class MainPresenter extends Presenter<MainScreen> {
+public class ListPresenter extends Presenter<ListScreen> {
+    public ListPresenter(){
 
-    public MainPresenter() {
     }
 
     @Override
-    public void attachScreen(MainScreen screen) {
+    public void attachScreen(ListScreen screen) {
         super.attachScreen(screen);
     }
 
