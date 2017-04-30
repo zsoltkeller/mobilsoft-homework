@@ -2,6 +2,9 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab;
 
 import android.app.Application;
 
+import javax.inject.Inject;
+
+import hu.bme.aut.mobsoft.lab.mobsoftlab.repository.Repository;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.UIModule;
 
 /**
@@ -12,14 +15,15 @@ public class MobSoftApplication extends Application {
 
     public static MobSoftApplicationComponent injector;
 
+    @Inject
+    Repository repository;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        injector =
-                DaggerMobSoftApplicationComponent.builder().
-                        uIModule(
-                                new UIModule(this)
-                        ).build();
+        injector = DaggerMobSoftApplicationComponent.builder().uIModule(new UIModule(this)).build();
+        injector.inject(this);
+        repository.open(getApplicationContext());
     }
 }
