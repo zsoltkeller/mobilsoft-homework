@@ -6,7 +6,10 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.repository;
 
 import android.content.Context;
 
+import java.util.Date;
 import java.util.List;
+
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
 
 public interface Repository {
@@ -15,13 +18,19 @@ public interface Repository {
 
     void close();
 
-    List<CostRecord> getCostRecords();
+    List<CostRecord> getCostRecords(Date date);
 
-    void addCostRecord(CostRecord costRecords);
+    void addCostRecord(CostRecord costRecord);
 
-    void updateCostRecord(CostRecord costRecord);
+    void updateCostRecord(List<CostRecord> costRecords);
 
     void removeCostRecord(CostRecord costRecord);
 
     boolean isInDB(CostRecord costRecord);
+
+    List<Category> getCategories();
+
+    void addCategory(Category category);
+
+    boolean isInDB(Category category);
 }

@@ -1,5 +1,6 @@
 package hu.bme.aut.mobsoft.lab.mobsoftlab.repository;
 
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
 
 /**
@@ -17,11 +18,20 @@ public class MemoryRepository implements Repository {
     private static final long MINUTE = 60 * 1000;
 
     public static List<CostRecord> costRecords;
+    public static List<Category> categories;
+
 
     @Override
     public void open(Context context) {
-        CostRecord cost1 = new CostRecord(1L,"cost one", "categry1", 2400, new Date(), "comment");
-        CostRecord cost2 = new CostRecord(2L,"cost two", "categry2", 4400, new Date(), "comment2");
+        Category cat1 = new Category(1L, "Utazás");
+        Category cat2 = new Category(2L, "Szórakozás");
+
+        categories = new ArrayList<>();
+        categories.add(cat1);
+        categories.add(cat2);
+
+        CostRecord cost1 = new CostRecord(3L,"cost one", cat1, 2400, new Date(), "comment");
+        CostRecord cost2 = new CostRecord(4L,"cost two", cat2, 4400, new Date(), "comment2");
 
         costRecords = new ArrayList<>();
         costRecords.add(cost1);
@@ -34,7 +44,8 @@ public class MemoryRepository implements Repository {
     }
 
     @Override
-    public List<CostRecord> getCostRecords() {
+    public List<CostRecord> getCostRecords(Date date) {
+        //TODO: DATE szűrés
         return costRecords;
     }
 
@@ -44,8 +55,15 @@ public class MemoryRepository implements Repository {
     }
 
     @Override
-    public void updateCostRecord(CostRecord costRecord) {
-        //TODO: implement
+    public void updateCostRecord(List<CostRecord> costRecords) {
+        for (int i = 0; i < this.costRecords.size(); i++) {
+            CostRecord cr = this.costRecords.get(i);
+            for (CostRecord costRecord : costRecords) {
+                if (costRecord.getId().equals(cr.getId())) {
+                    this.costRecords.set(i, costRecord);
+                }
+            }
+        }
     }
 
     @Override
@@ -56,5 +74,20 @@ public class MemoryRepository implements Repository {
     @Override
     public boolean isInDB(CostRecord costRecord) {
         return costRecords.contains(costRecord);
+    }
+
+    @Override
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    @Override
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
+    @Override
+    public boolean isInDB(Category category) {
+        return categories.contains(category);
     }
 }

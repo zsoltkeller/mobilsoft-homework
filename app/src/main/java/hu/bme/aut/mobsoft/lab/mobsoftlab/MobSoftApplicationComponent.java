@@ -3,7 +3,9 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.category.CategoryInteractor;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.CostRecordInteractor;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.repository.RepositoryModule;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.UIModule;
@@ -29,5 +31,7 @@ public interface MobSoftApplicationComponent {
     void inject(StatisticsActivity statisticsActivity);
 
     void inject(MobSoftApplication app);
-    void inject(CostRecordInteractor favouritesInteractor);
+    void inject(CostRecordInteractor costRecordInteractor);
+    void inject(CategoryInteractor categoryInteractor);
+
 }

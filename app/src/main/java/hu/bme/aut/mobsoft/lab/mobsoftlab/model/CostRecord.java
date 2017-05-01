@@ -12,7 +12,7 @@ import java.util.Date;
 public class CostRecord {
     private Long id = null;
     private String name;
-    private String category;
+    private Category category;
     private double cost;
     private Date date;
     private String comment;
@@ -21,7 +21,7 @@ public class CostRecord {
     public CostRecord() {
     }
 
-    public CostRecord(Long id, String name, String category, double cost, Date date, String comment) {
+    public CostRecord(Long id, String name, Category category, double cost, Date date, String comment) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -47,11 +47,11 @@ public class CostRecord {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

@@ -1,13 +1,16 @@
 package hu.bme.aut.mobsoft.lab.mobsoftlab.repository;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
 
 /**
@@ -29,18 +32,28 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
-    public List<CostRecord> getCostRecords() {
+    public List<CostRecord> getCostRecords(Date date) {
+        //TODO: DATE szűrés
         return SugarRecord.listAll(CostRecord.class);
     }
 
     @Override
-    public void addCostRecord(CostRecord costRecords) {
-        SugarRecord.saveInTx(costRecords);
+    public void addCostRecord(CostRecord costRecord) {
+        SugarRecord.saveInTx(costRecord);
     }
 
     @Override
-    public void updateCostRecord(CostRecord costRecord) {
-        //TODO: implement
+    public void updateCostRecord(List<CostRecord> costRecordsToUpdate) {
+        List<CostRecord> costRecords = SugarRecord.listAll(CostRecord.class);
+        List<CostRecord> toUpdate = new ArrayList<>(costRecords.size());
+        for (CostRecord costRecordItem : costRecords) {
+            for (CostRecord crToUpdate : costRecordsToUpdate) {
+                if (crToUpdate.getId().equals(costRecordItem.getId())) {
+                    toUpdate.add(crToUpdate);
+                }
+            }
+        }
+        SugarRecord.saveInTx(toUpdate);
     }
 
     @Override
@@ -50,6 +63,21 @@ public class SugarOrmRepository implements Repository {
 
     @Override
     public boolean isInDB(CostRecord costRecord) {
-        return false;
+        return SugarRecord.findById(CostRecord.class, costRecord.getId()) != null;
+    }
+
+    @Override
+    public List<Category> getCategories() {
+        return SugarRecord.listAll(Category.class);
+    }
+
+    @Override
+    public void addCategory(Category category) {
+        SugarRecord.saveInTx(category);
+    }
+
+    @Override
+    public boolean isInDB(Category category) {
+        return SugarRecord.findById(Category.class, category.getId()) != null;
     }
 }
