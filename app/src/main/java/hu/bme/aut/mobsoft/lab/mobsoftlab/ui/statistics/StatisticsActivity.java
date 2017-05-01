@@ -2,6 +2,7 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.statistics;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -34,5 +35,10 @@ public class StatisticsActivity extends AppCompatActivity implements StatisticsS
     protected void onStop() {
         super.onStop();
         statisticsPresenter.detachScreen();
+    }
+
+    @Override
+    public void showMessage(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

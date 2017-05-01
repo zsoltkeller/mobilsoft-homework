@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import de.greenrobot.event.EventBus;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.MobSoftApplication;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.AddCostRecordEvent;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.GetCostRecordsEvent;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.RemoveCostRecordEvent;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.repository.Repository;
 
@@ -18,18 +22,36 @@ public class CostRecordInteractor {
     @Inject
     Repository repository;
 
+    @Inject
+    EventBus bus;
+
     public CostRecordInteractor() {
         MobSoftApplication.injector.inject(this);
     }
 
     public void getCostRecords() {
         //TODO: DATE SZŰRÉS
-        List<CostRecord> costRecords = repository.getCostRecords(new Date());
+        GetCostRecordsEvent event = new GetCostRecordsEvent();
+        try {
+            List<CostRecord> costRecords = repository.getCostRecords(new Date());
+            event.setCostRecords(costRecords);
+            bus.post(event);
+        } catch (Exception e) {
+            event.setThrowable(e);
+            bus.post(event);
+        }
     }
 
     public void addCostRecord(CostRecord costRecord) {
-
-        repository.addCostRecord(costRecord);
+        AddCostRecordEvent event = new AddCostRecordEvent();
+        event.setCostRecord(costRecord);
+        try {
+            repository.addCostRecord(costRecord);
+            bus.post(event);
+        } catch (Exception e) {
+            event.setThrowable(e);
+            bus.post(event);
+        }
     }
 
     public void updateCostRecords(List<CostRecord> costRecords) {
@@ -42,7 +64,15 @@ public class CostRecordInteractor {
 
     public void removeCostRecord(CostRecord costRecord) {
 
-        repository.removeCostRecord(costRecord);
+        RemoveCostRecordEvent event = new RemoveCostRecordEvent();
+        event.setCostRecord(costRecord);
+        try {
+            repository.removeCostRecord(costRecord);
+            bus.post(event);
+        } catch (Exception e) {
+            event.setThrowable(e);
+            bus.post(event);
+        }
     }
 
 }

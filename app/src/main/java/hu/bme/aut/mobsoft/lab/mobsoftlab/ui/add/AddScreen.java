@@ -5,4 +5,5 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.add;
  */
 
 public interface AddScreen {
+    void showMessage(String text);
 }
