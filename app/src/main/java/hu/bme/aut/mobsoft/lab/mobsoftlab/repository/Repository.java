@@ -20,6 +20,8 @@ public interface Repository {
 
     List<CostRecord> getCostRecords(Date date);
 
+    CostRecord getCostRecordsById(Long id);
+
     void addCostRecord(CostRecord costRecord);
 
     void updateCostRecord(List<CostRecord> costRecords);

@@ -9,6 +9,9 @@ import javax.inject.Inject;
 
 import de.greenrobot.event.EventBus;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.MobSoftApplication;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.category.CategoryInteractor;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.category.events.AddCategoryEvent;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.category.events.GetCategoriesEvent;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.CostRecordInteractor;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.AddCostRecordEvent;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.GetCostRecordsEvent;
@@ -24,6 +27,9 @@ public class AddPresenter extends Presenter<AddScreen> {
 
     @Inject
     CostRecordInteractor costRecordInteractor;
+
+    @Inject
+    CategoryInteractor categoryInteractor;
 
     @Inject
     Executor executor;
@@ -62,7 +68,58 @@ public class AddPresenter extends Presenter<AddScreen> {
             }
             Log.e("Networking", "Error reading favourites", event.getThrowable());
         } else {
-            //TODO Impl
+            if (screen != null) {
+                screen.costRecordSuccessfullyAdded();
+            }
+        }
+    }
+
+    public void getCategories(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                categoryInteractor.getCategories();
+            }
+        });
+    }
+
+    public void onGetCategoriesEvent(GetCategoriesEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showMessage("error");
+            }
+            Log.e("Networking", "Error reading favourites", event.getThrowable());
+        } else {
+            if (screen != null) {
+                screen.showCategories(event.getCategories());
+            }
+        }
+    }
+
+
+
+    public void addNewCategory(Long id, String name){
+        final Category cat = new Category(id, name);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                categoryInteractor.addCategory(cat);
+            }
+        });
+    }
+
+    public void onAddNewCategoryEvent(AddCategoryEvent event) {
+        if (event.getThrowable() != null) {
+            event.getThrowable().printStackTrace();
+            if (screen != null) {
+                screen.showMessage("error");
+            }
+            Log.e("Networking", "Error reading favourites", event.getThrowable());
+        } else {
+            if (screen != null) {
+                screen.categoryAdded(event.getCategory());
+            }
         }
     }
 }

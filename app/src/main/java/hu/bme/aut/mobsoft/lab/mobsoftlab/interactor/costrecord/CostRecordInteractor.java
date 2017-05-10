@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import de.greenrobot.event.EventBus;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.MobSoftApplication;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.AddCostRecordEvent;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.GetCostRecordByIdEvent;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.GetCostRecordsEvent;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.events.RemoveCostRecordEvent;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
@@ -29,12 +30,23 @@ public class CostRecordInteractor {
         MobSoftApplication.injector.inject(this);
     }
 
-    public void getCostRecords() {
-        //TODO: DATE SZŰRÉS
+    public void getCostRecords(Date date) {
         GetCostRecordsEvent event = new GetCostRecordsEvent();
         try {
-            List<CostRecord> costRecords = repository.getCostRecords(new Date());
+            List<CostRecord> costRecords = repository.getCostRecords(date);
             event.setCostRecords(costRecords);
+            bus.post(event);
+        } catch (Exception e) {
+            event.setThrowable(e);
+            bus.post(event);
+        }
+    }
+
+    public void getCostRecordById(Long id) {
+        GetCostRecordByIdEvent event = new GetCostRecordByIdEvent();
+        try {
+            CostRecord costRecord = repository.getCostRecordsById(id);
+            event.setCostRecord(costRecord);
             bus.post(event);
         } catch (Exception e) {
             event.setThrowable(e);

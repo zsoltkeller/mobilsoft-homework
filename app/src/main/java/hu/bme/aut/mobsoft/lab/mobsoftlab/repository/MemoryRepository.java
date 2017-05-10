@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class MemoryRepository implements Repository {
-    private static final long MINUTE = 60 * 1000;
 
     public static List<CostRecord> costRecords;
     public static List<Category> categories;
@@ -46,7 +45,27 @@ public class MemoryRepository implements Repository {
     @Override
     public List<CostRecord> getCostRecords(Date date) {
         //TODO: DATE szűrés
+        List<CostRecord> costRecordsInDate = new ArrayList<CostRecord>();
+        Date today = new Date();
+        for(CostRecord c : costRecords){
+            if(today.getDay() == c.getDate().getDay())
+            {
+
+            }
+        }
         return costRecords;
+    }
+
+    @Override
+    public CostRecord getCostRecordsById(Long id) {
+        CostRecord cost = null;
+        for (CostRecord c : costRecords) {
+            if (c.getId().equals(id)) {
+                cost = c;
+                break;
+            }
+        }
+        return cost;
     }
 
     @Override

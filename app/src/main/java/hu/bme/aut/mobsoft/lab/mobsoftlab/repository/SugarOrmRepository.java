@@ -38,6 +38,18 @@ public class SugarOrmRepository implements Repository {
     }
 
     @Override
+    public CostRecord getCostRecordsById(Long id) {
+        CostRecord cost = null;
+        for (CostRecord c : SugarRecord.listAll(CostRecord.class)) {
+            if (c.getId().equals(id)) {
+                cost = c;
+                break;
+            }
+        }
+        return cost;
+    }
+
+    @Override
     public void addCostRecord(CostRecord costRecord) {
         SugarRecord.saveInTx(costRecord);
     }

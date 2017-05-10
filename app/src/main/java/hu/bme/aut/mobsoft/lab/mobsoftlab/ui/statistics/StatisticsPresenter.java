@@ -2,6 +2,7 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.statistics;
 
 import android.util.Log;
 
+import java.util.Date;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -46,7 +47,7 @@ public class StatisticsPresenter extends Presenter<StatisticsScreen> {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                costRecordInteractor.getCostRecords();
+                costRecordInteractor.getCostRecords(new Date());
             }
         });
     }
@@ -60,8 +61,8 @@ public class StatisticsPresenter extends Presenter<StatisticsScreen> {
             Log.e("Networking", "Error reading favourites", event.getThrowable());
         } else {
             if (screen != null) {
-                for(CostRecord t : event.getCostRecords()){
-                    screen.showMessage(t.getName());
+                if (screen != null) {
+                    screen.costRecordListReady(event.getCostRecords());
                 }
             }
         }

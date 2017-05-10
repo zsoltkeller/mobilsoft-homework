@@ -13,7 +13,9 @@ import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.UIModule;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.add.AddActivity;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.add.AddPresenter;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.details.DetailsActivity;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.details.DetailsPresenter;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.list.ListActivity;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.list.ListPresenter;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.login.LoginActivity;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.main.MainActivity;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.statistics.StatisticsActivity;
@@ -35,9 +37,12 @@ public interface MobSoftApplicationComponent {
 
     void inject(CostRecordInteractor costRecordInteractor);
     void inject(CategoryInteractor categoryInteractor);
+
     void inject(MobSoftApplication app);
+
     void inject(StatisticsPresenter statisticsPresenter);
     void inject(AddPresenter addPresenter);
-
+    void inject(ListPresenter listPresenter);
+    void inject(DetailsPresenter detailsPresenter);
 
 }
