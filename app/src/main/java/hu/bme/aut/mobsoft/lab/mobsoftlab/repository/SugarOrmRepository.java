@@ -12,6 +12,7 @@ import java.util.List;
 
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.User;
 
 /**
  * Created by mobsoft on 2017. 04. 28..
@@ -91,5 +92,17 @@ public class SugarOrmRepository implements Repository {
     @Override
     public boolean isInDB(Category category) {
         return SugarRecord.findById(Category.class, category.getId()) != null;
+    }
+
+    @Override
+    public User login(String userName, String password) {
+        User user = null;
+        for (User u : SugarRecord.listAll(User.class)) {
+            if (u.getName() == userName && u.getPassword() == password) {
+                user = u;
+                break;
+            }
+        }
+        return user;
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.User;
 
 public interface Repository {
 
@@ -35,4 +36,6 @@ public interface Repository {
     void addCategory(Category category);
 
     boolean isInDB(Category category);
+
+    User login(String userName, String password);
 }

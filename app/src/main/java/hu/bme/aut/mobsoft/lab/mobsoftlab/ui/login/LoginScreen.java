@@ -7,4 +7,5 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.ui.login;
 public interface LoginScreen {
     void showSuccessfulLogin(String text);
     void showErrorLogin(String text);
+    void showMessage(String text);
 }

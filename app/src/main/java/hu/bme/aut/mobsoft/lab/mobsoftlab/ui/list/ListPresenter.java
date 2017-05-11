@@ -39,6 +39,7 @@ public class ListPresenter extends Presenter<ListScreen> {
 
     @Override
     public void detachScreen() {
+        bus.unregister(this);
         super.detachScreen();
     }
 

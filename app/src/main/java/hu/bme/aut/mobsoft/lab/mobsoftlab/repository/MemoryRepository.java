@@ -2,6 +2,7 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.repository;
 
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.User;
 
 /**
  * Created by mobsoft on 2017. 04. 28..
@@ -18,6 +19,7 @@ public class MemoryRepository implements Repository {
 
     public static List<CostRecord> costRecords;
     public static List<Category> categories;
+    public static List<User> users;
 
 
     @Override
@@ -35,6 +37,10 @@ public class MemoryRepository implements Repository {
         costRecords = new ArrayList<>();
         costRecords.add(cost1);
         costRecords.add(cost2);
+
+        users = new ArrayList<>();
+        User u = new User(1l, "username", "password");
+        users.add(u);
     }
 
     @Override
@@ -108,5 +114,17 @@ public class MemoryRepository implements Repository {
     @Override
     public boolean isInDB(Category category) {
         return categories.contains(category);
+    }
+
+    @Override
+    public User login(String userName, String password) {
+        User user = null;
+        for (User u : users) {
+            if (u.getName() == userName && u.getPassword() == password) {
+                user = u;
+                break;
+            }
+        }
+        return user;
     }
 }
