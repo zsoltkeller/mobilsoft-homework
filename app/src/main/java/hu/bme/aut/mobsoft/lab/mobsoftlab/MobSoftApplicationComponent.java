@@ -9,6 +9,7 @@ import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.costrecord.CostRecordInterac
 import hu.bme.aut.mobsoft.lab.mobsoftlab.interactor.user.UserInteractor;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.network.NetworkModule;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.repository.RepositoryModule;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.UIModule;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.add.AddActivity;
@@ -28,7 +29,7 @@ import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.statistics.StatisticsPresenter;
  */
 
 @Singleton
-@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class})
+@Component(modules = {UIModule.class, RepositoryModule.class, InteractorModule.class, NetworkModule.class})
 public interface MobSoftApplicationComponent {
     void inject(MainActivity mainActivity);
     void inject(LoginActivity loginActivity);
