@@ -34,22 +34,16 @@ public class SugarOrmRepository implements Repository {
 
     @Override
     public List<CostRecord> getCostRecords(Date date) {
-        //TODO: DATE szűrés
         return SugarRecord.listAll(CostRecord.class);
     }
 
     @Override
     public CostRecord getCostRecordsById(Long id) {
-        CostRecord cost = null;
-        for (CostRecord c : SugarRecord.listAll(CostRecord.class)) {
-            if (c.getId().equals(id)) {
-                cost = c;
-                break;
-            }
-        }
-        return cost;
+        return SugarRecord.findById(CostRecord.class, id);
     }
 
+    //TODO: category-t nem biztos, hogy ki tudja menteni
+    //TODO: date-t millisec-be menteni
     @Override
     public void addCostRecord(CostRecord costRecord) {
         SugarRecord.saveInTx(costRecord);

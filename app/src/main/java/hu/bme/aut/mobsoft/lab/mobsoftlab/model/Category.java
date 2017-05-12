@@ -1,9 +1,12 @@
 package hu.bme.aut.mobsoft.lab.mobsoftlab.model;
 
+import com.orm.dsl.Table;
+
 /**
  * Created by mobsoft on 2017. 04. 28..
  */
 
+@Table
 public class Category {
     private Long id = null;
     private String name;

@@ -12,8 +12,10 @@ import java.util.Date;
 public class CostRecord {
     private Long id = null;
     private String name;
+    //TODO: lehet nem fogja tudni menteni
     private Category category;
     private double cost;
+    // TODO: long millisec
     private Date date;
     private String comment;
 

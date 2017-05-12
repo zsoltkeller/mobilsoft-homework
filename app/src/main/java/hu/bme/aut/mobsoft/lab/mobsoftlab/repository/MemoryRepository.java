@@ -56,10 +56,10 @@ public class MemoryRepository implements Repository {
         for(CostRecord c : costRecords){
             if(today.getDay() == c.getDate().getDay())
             {
-
+                costRecordsInDate.add(c);
             }
         }
-        return costRecords;
+        return costRecordsInDate;
     }
 
     @Override
