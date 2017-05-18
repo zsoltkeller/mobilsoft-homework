@@ -14,6 +14,8 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import hu.bme.aut.mobsoft.lab.mobsoftlab.BuildConfig;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.repository.MemoryRepository;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.main.MainPresenter;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.ui.main.MainScreen;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.utils.RobolectricDaggerTestRunner;
@@ -37,17 +39,18 @@ public class CostRecordTest {
     }
 
     @Test
-    public void testTodo() {
+    public void addCategory() {
         MainScreen mainScreen = mock(MainScreen.class);
         mainPresenter.attachScreen(mainScreen);
         //mainPresenter.getFavourites();
 
-        ArgumentCaptor<String> todosCaptor = ArgumentCaptor.forClass(String.class);
-        verify(mainScreen).showMessage(todosCaptor.capture());
+        Category cat = new Category();
+        cat.setName("Test");
+        MemoryRepository repo = new MemoryRepository();
 
-        List<String> capturedTodos = todosCaptor.getAllValues();
-        assertEquals("todo one", capturedTodos.get(0));
-        assertEquals("todo two", capturedTodos.get(1));
+        repo.addCategory(cat);
+
+        assert repo.isInDB(cat);
     }
 
     @After

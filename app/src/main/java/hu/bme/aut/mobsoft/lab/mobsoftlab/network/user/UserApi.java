@@ -1,10 +1,11 @@
 package hu.bme.aut.mobsoft.lab.mobsoftlab.network.user;
 
+
+import hu.bme.aut.mobsoft.lab.mobsoftlab.network.model.User;
 import retrofit2.Call;
 import retrofit2.http.*;
 
 import okhttp3.RequestBody;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,26 +17,14 @@ public interface UserApi {
   /**
    * Logs user into the system
    * 
-   * @param username The user name for login
-   * @param password The password for login in clear text
+   * @param user The user info as JSON.
    * @return Call<String>
    */
   
-  @GET("user/login")
+  @POST("user/login")
   Call<String> loginUser(
-    @Query("username") String username, @Query("password") String password
+    @Body User user
   );
-
-  
-  /**
-   * Logs out current logged in user session
-   * 
-   * @return Call<Void>
-   */
-  
-  @GET("user/logout")
-  Call<Void> logoutUser();
-    
 
   
 }

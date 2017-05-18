@@ -1,7 +1,6 @@
 package hu.bme.aut.mobsoft.lab.mobsoftlab.network.costrecord;
 
-
-import hu.bme.aut.mobsoft.lab.mobsoftlab.model.CostRecord;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.network.model.CostRecord;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -28,13 +27,13 @@ public interface CostrecordApi {
   /**
    * Add a new costrecord to the database
    * 
-   * @param body CostRecord object that needs to be added to the database
+   * @param costredocrd CostRecord object that needs to be added to the database
    * @return Call<Void>
    */
   
   @POST("costrecord")
   Call<Void> addCostRecord(
-    @Body CostRecord body
+    @Body CostRecord costredocrd
   );
 
   
@@ -52,7 +51,7 @@ public interface CostrecordApi {
 
   
   /**
-   * Add a new costrecord to the database
+   * Update or add a new costrecord to the database
    * 
    * @param body CostRecord object that needs to be added to the database
    * @return Call<Void>
@@ -68,13 +67,12 @@ public interface CostrecordApi {
    * Deletes a CostRecord
    * 
    * @param costRecordId CostRecord id to delete
-   * @param apiKey 
    * @return Call<Void>
    */
   
   @DELETE("costrecord/{costRecordId}")
   Call<Void> deleteCostRecord(
-    @Path("costRecordId") Long costRecordId, @Header("api_key") String apiKey
+    @Path("costRecordId") Long costRecordId
   );
 
   

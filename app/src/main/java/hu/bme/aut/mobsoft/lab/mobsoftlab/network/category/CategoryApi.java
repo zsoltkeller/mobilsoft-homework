@@ -1,11 +1,15 @@
 package hu.bme.aut.mobsoft.lab.mobsoftlab.network.category;
 
+import hu.bme.aut.mobsoft.lab.mobsoftlab.network.model.Category;
 
-import hu.bme.aut.mobsoft.lab.mobsoftlab.model.Category;
+
 import retrofit2.Call;
 import retrofit2.http.*;
 
 import okhttp3.RequestBody;
+
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

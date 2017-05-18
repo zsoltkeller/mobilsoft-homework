@@ -3,16 +3,8 @@ package hu.bme.aut.mobsoft.lab.mobsoftlab.mock.interceptors;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import javax.inject.Singleton;
-
-import dagger.Provides;
-import hu.bme.aut.mobsoft.lab.mobsoftlab.mock.MockHttpServer;
-import hu.bme.aut.mobsoft.lab.mobsoftlab.network.NetworkModule;
-import hu.bme.aut.mobsoft.lab.mobsoftlab.network.costrecord.CostrecordApi;
 import okhttp3.Headers;
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -20,7 +12,6 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.Okio;
-import retrofit2.Retrofit;
 
 /**
  * Created by Mobsoft on 2017. 05. 12..

@@ -4,7 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.network.category.CategoryApi;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.network.costrecord.CostrecordApi;
+import hu.bme.aut.mobsoft.lab.mobsoftlab.network.user.UserApi;
 import hu.bme.aut.mobsoft.lab.mobsoftlab.utils.GsonHelper;
 import okhttp3.OkHttpClient;
 import retrofit2.GsonConverterFactory;
@@ -39,7 +41,19 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public CostrecordApi provideATodoApi(Retrofit retrofit) {
+    public CostrecordApi provideCostrecordApi(Retrofit retrofit) {
         return retrofit.create(CostrecordApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public CategoryApi provideCategoryApi(Retrofit retrofit) {
+        return retrofit.create(CategoryApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public UserApi provideUserApi(Retrofit retrofit) {
+        return retrofit.create(UserApi.class);
     }
 }
